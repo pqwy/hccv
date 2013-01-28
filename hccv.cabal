@@ -1,0 +1,130 @@
+name:                hccv
+version:             0.1.0.0
+synopsis:            XXX
+-- description:         
+homepage:            http://xxxx.desu
+license:             BSD3
+license-file:        LICENSE
+author:              David Kaloper <david@laze.rz>
+maintainer:          David Kaloper <david@laze.rs>
+copyright:           (c) 2012 David Kaloper
+category:            AI, Graphics
+build-type:          Simple
+cabal-version:       >=1.8
+
+library
+  exposed-modules:
+        Types
+        Convos
+        Memory
+        IO
+        Util
+        Basic
+        Classic
+
+  other-modules:
+        Raw
+        FfiUtils
+        AuxTypes
+
+  hs-source-dirs:
+        src
+
+  build-tools:
+        hsc2hs
+
+  include-dirs:
+        libccv cbits
+
+  c-sources:
+        cbits/hccv_helpers.c
+
+        -- libccv/ccv_cache.c
+        -- libccv/ccv_memory.c
+        -- libccv/3rdparty/sha1/sha1.c
+        -- libccv/3rdparty/kissfft/kiss_fft.c
+        -- libccv/3rdparty/kissfft/kiss_fftnd.c
+        -- libccv/3rdparty/kissfft/kiss_fftr.c
+        -- libccv/3rdparty/kissfft/kiss_fftndr.c
+        -- libccv/3rdparty/kissfft/kissf_fft.c
+        -- libccv/3rdparty/kissfft/kissf_fftnd.c
+        -- libccv/3rdparty/kissfft/kissf_fftr.c
+        -- libccv/3rdparty/kissfft/kissf_fftndr.c
+        -- libccv/3rdparty/dsfmt/dSFMT.c
+        -- libccv/3rdparty/sfmt/SFMT.c
+        -- libccv/ccv_io.c
+        -- libccv/ccv_numeric.c
+        -- libccv/ccv_algebra.c
+        -- libccv/ccv_util.c
+        -- libccv/ccv_basic.c
+        -- libccv/ccv_resample.c
+        -- libccv/ccv_transform.c
+        -- libccv/ccv_classic.c
+        -- libccv/ccv_daisy.c
+        -- libccv/ccv_sift.c
+        -- libccv/ccv_bbf.c
+        -- libccv/ccv_mser.c
+        -- libccv/ccv_swt.c
+        -- libccv/ccv_dpm.c
+        -- libccv/ccv_tld.c
+        -- libccv/ccv_ferns.c
+
+  build-depends:
+        base >= 4.6.0,
+        bindings-DSL >= 1.0.10 && < 1.1,
+        vector >= 0.10.0,
+        hmatrix >= 0.14
+
+  extensions:
+        ForeignFunctionInterface
+        PolyKinds
+        DataKinds
+        TypeFamilies
+        EmptyDataDecls
+        DeriveDataTypeable
+        TypeOperators
+        ScopedTypeVariables
+        MultiParamTypeClasses
+        FlexibleContexts
+        FlexibleInstances
+
+  ghc-options:
+        -O2
+
+  extra-lib-dirs:
+        /home/self/coad/projects/hccv/libccv
+
+  extra-libraries:
+        ccv
+        jpeg
+        png
+        z
+        fftw3f
+        fftw3
+
+  -- extra-libraries:
+  --       jpeg
+  --       png
+  --       z
+  --       fftw3f
+  --       fftw3
+
+  -- cc-options:          -std=c99 -O3 -ffast-math -msse2 -D HAVE_SSE2 -D HAVE_LIBJPEG -D HAVE_LIBPNG -D HAVE_FFTW3
+
+executable test
+  build-depends:
+        base   >= 4.0,
+        vector >= 0.10.0,
+        hccv,
+        hmatrix >= 0.14
+
+  hs-source-dirs:
+        test
+
+  main-is:
+        test.hs
+
+  ghc-options:
+        -O2
+        -rtsopts
+
